@@ -12,7 +12,7 @@ directory = os.fsencode(excel_path)
 os.chdir(txt_path)
 
 #opens and rewrites, or creates a 
-file_name = open("SearchResult.txt","w")
+SearchResults = open("SearchResult.txt","w")
 
 #change directory path to the excel spreadsheets so we can read them
 os.chdir(excel_path)
@@ -37,8 +37,8 @@ for file in os.listdir(directory):
                     cellValue = str(sheet.cell(row = i, column = j).value)
                     if keyword.lower() == cellValue.lower():
                         #write the file name which contains the keyword into a .txt file
-                        file_name.write(filename)
-                        file_name.write("\n")
+                        SearchResults.write(filename)
+                        SearchResults.write("\n")
                         break
                 else:
                     continue
@@ -48,4 +48,4 @@ for file in os.listdir(directory):
     else:
         continue
 
-file_name.close()
+SearchResults.close()
