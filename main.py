@@ -3,8 +3,10 @@ import openpyxl
 from tkinter import *
 from tkinter import filedialog
 
+#makes a tkinter window and calls it root
 root = Tk()
 
+#make a entry widgets 50 pixels wide
 entryText = Entry(root,width = 50)
 entryText.insert(0,"Here goes the path for the search results.")
 entryExcel = Entry(root,width = 50)
@@ -12,7 +14,7 @@ entryExcel.insert(0,"Here goes the path for the excel spreadsheets.")
 entryKeyword = Entry(root,width = 50)
 entryKeyword.insert(0,"Enter Keyword")
 
-
+#put the entry widgets in a grid
 entryText.grid(row = 0, column = 0)
 entryExcel.grid(row = 1, column = 0)
 entryKeyword.grid(row = 2, column = 0)
