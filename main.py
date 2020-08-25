@@ -2,12 +2,21 @@ import os
 import openpyxl
 
 keyword = input("enter a keyword: \n")
-os.chdir("/home/karpi/Documents/excelsample/")
+excel_path = "/home/karpi/Documents/excelsample/"
+txt_path = "/home/karpi/Documents/"
 
+#make a directory object which contains the directory to use
+directory = os.fsencode(excel_path)
 
-directory = os.fsencode("/home/karpi/Documents/excelsample/")
+#change directory to .txt path so we can create a file there
+os.chdir(txt_path)
 
+#opens and rewrites, or creates a 
 file_name = open("SearchResult.txt","w")
+
+#change directory path to the excel spreadsheets so we can read them
+os.chdir(excel_path)
+
 
 #go through files in a directory
 for file in os.listdir(directory):
@@ -17,16 +26,26 @@ for file in os.listdir(directory):
         
         #read excel file
         wb = openpyxl.load_workbook(filename)
-        sheet = wb.get_sheet_by_name('Sheet1')
-        for i in range(1,10):
-            for j in range(1,10):
-                if sheet.cell(row = i, column = j).value == keyword:
-                    file_name.write(filename)
-                    break
-            else:
-                continue
-            break
+
+        #read sheets in order
+        for sheet in wb:
+            #2d for loop to read from cells 
+            for i in range(1,10):
+                for j in range(1,10):
+                    #read cell value and convert them to string
+                    #so we can use lower method on them
+                    cellValue = str(sheet.cell(row = i, column = j).value)
+                    if keyword.lower() == cellValue.lower():
+                        #write the file name which contains the keyword into a .txt file
+                        file_name.write(filename)
+                        file_name.write("\n")
+                        break
+                else:
+                    continue
+                break
                 
         continue
     else:
         continue
+
+file_name.close()
