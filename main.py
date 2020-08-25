@@ -48,6 +48,7 @@ def generate():
     os.chdir(txt_path)
 
     #proba
+    #proba2
     #opens and rewrites, or creates a 
     SearchResults = open("SearchResult.txt","w")
 
